@@ -8,6 +8,7 @@ static const routeName='BookDetails';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body:DetailsViewBody() ,
     );
   }
