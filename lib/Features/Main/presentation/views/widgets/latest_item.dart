@@ -4,52 +4,55 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LatestItem extends StatelessWidget {
-   LatestItem({super.key});
-List<String>stars=[
-  'assets/svg/star.svg',
-  'assets/svg/star.svg',
-  'assets/svg/star.svg',
-  'assets/svg/star.svg',
-  'assets/svg/starblack.svg'
-
-];
+  LatestItem({super.key});
+  List<String> stars = [
+    'assets/svg/star.svg',
+    'assets/svg/star.svg',
+    'assets/svg/star.svg',
+    'assets/svg/star.svg',
+    'assets/svg/starblack.svg',
+  ];
   @override
   Widget build(BuildContext context) {
-    final screenWidth=MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: screenWidth*0.28,
+      width: screenWidth * 0.28,
       child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AspectRatio(
-              aspectRatio: 89/121,
+              aspectRatio: 89 / 121,
               child: ClipRRect(
                 borderRadius: BorderRadiusGeometry.circular(20),
-                child: Image.asset('assets/images/Book image.png',fit: BoxFit.scaleDown,
-               
+                child: Image.asset(
+                  'assets/images/Book image.png',
+                  fit: BoxFit.scaleDown,
                 ),
               ),
             ),
-            SizedBox(height: 3,),
+            SizedBox(height: 3),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children:List.generate(stars.length, (index){
+              children: List.generate(stars.length, (index) {
                 return SvgPicture.asset(stars[index]);
               }),
             ),
-            SizedBox(height: 3,),
+            SizedBox(height: 3),
             Text(
               maxLines: 1,
-              overflow:TextOverflow.ellipsis ,
-              'Starlight\'s Shadow #1',style: AppStyles.regulateIlatic10.copyWith(color: Colors.black),),
-            SizedBox(height: 5,),
+              overflow: TextOverflow.ellipsis,
+              'Starlight\'s Shadow #1',
+              style: AppStyles.regulateIlatic10.copyWith(color: Colors.black),
+            ),
+            SizedBox(height: 5),
             Text(
               maxLines: 1,
-              overflow:TextOverflow.ellipsis ,
-              'Hunt the Stars',style: AppStyles.bold14.copyWith(color: Color(0xff9A9A9A)))
-            
+              overflow: TextOverflow.ellipsis,
+              'Hunt the Stars',
+              style: AppStyles.bold14.copyWith(color: Color(0xff9A9A9A)),
+            ),
           ],
         ),
       ),

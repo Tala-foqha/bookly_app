@@ -10,17 +10,14 @@ class SplashViewBody extends StatefulWidget {
 
   @override
   State<SplashViewBody> createState() => _SplashViewBodyState();
- 
 }
 
- 
-
-
 class _SplashViewBodyState extends State<SplashViewBody> {
-  void initState(){
+  void initState() {
     super.initState();
     excuteNavigation();
   }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,14 +26,10 @@ class _SplashViewBodyState extends State<SplashViewBody> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           OutlinedText(
-            text: Text(
-              'Booby',
-              style: AppStyles.bold64,
-            ),
-            strokes: [
-              OutlinedTextStroke(color: Colors.white, width: 2),
-            ],
+            text: Text('Booby', style: AppStyles.bold64),
+            strokes: [OutlinedTextStroke(color: Colors.white, width: 2)],
           ),
+
           // النص مع الحدود (Stroke + Fill) باستخدام Stack
           // Stack(
           //   children: [
@@ -61,15 +54,10 @@ class _SplashViewBodyState extends State<SplashViewBody> {
           //     ),
           //   ],
           // ),
-
           const SizedBox(height: 80),
 
           // صورة الـ B
-          Image.asset(
-            'assets/images/B.png',
-            fit: BoxFit.fill,
-            height: 294,
-          ),
+          Image.asset('assets/images/B.png', fit: BoxFit.fill, height: 294),
 
           const Spacer(),
 
@@ -85,10 +73,9 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     );
   }
 
-
-void excuteNavigation() async {
-  await Future.delayed(const Duration(seconds: 3),(){
- Navigator.pushReplacementNamed(context, MainView.routeName);
-
-  
- }); }}
+  void excuteNavigation() async {
+    await Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, MainView.routeName);
+    });
+  }
+}

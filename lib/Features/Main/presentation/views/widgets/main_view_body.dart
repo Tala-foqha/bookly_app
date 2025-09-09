@@ -11,26 +11,37 @@ class MainViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(padding: 
-        EdgeInsetsGeometry.only(top:32,bottom: 32,left: 25,right: 25),
-        child: AppBarWidget(),
+        Padding(
+          padding: EdgeInsetsGeometry.only(
+            top: 32,
+            bottom: 32,
+            left: 25,
+            right: 25,
+          ),
+          child: AppBarWidget(),
         ),
-        Expanded(child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30)),
-                color: Colors.white
+        Expanded(
+          child: Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                  color: Colors.white,
+                ),
+                child: HomeView(),
               ),
-              child: HomeView(),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: CustomNavigatorBar())
-          ],
-        ))
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: CustomNavigatorBar(),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

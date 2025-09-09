@@ -3,9 +3,7 @@
 import 'package:flutter/material.dart';
 
 class BestSellerWidget extends StatelessWidget {
-  const BestSellerWidget({
-    super.key,
-  });
+  const BestSellerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +11,16 @@ class BestSellerWidget extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       padding: EdgeInsets.only(left: 16),
       itemCount: 5,
-      
-      itemBuilder: (context,index){
-        return Image.asset('assets/images/best_seller.png',width: 163,
-        fit: BoxFit.cover,
+
+      itemBuilder: (context, index) {
+        return Image.asset(
+          'assets/images/best_seller.png',
+          width: 163,
+          fit: BoxFit.cover,
         );
-    
-      }, separatorBuilder: (BuildContext context, int index) =>SizedBox(width: 10,) ,
-      
-      );
+      },
+      separatorBuilder: (BuildContext context, int index) =>
+          SizedBox(width: 10),
+    );
   }
 }

@@ -2,6 +2,7 @@
 import 'package:bookly_app/Features/Main/presentation/views/widgets/details_view.dart';
 import 'package:bookly_app/Features/Main/presentation/views/widgets/latest_item.dart';
 import 'package:flutter/material.dart';
+
 class LatestListView extends StatelessWidget {
   const LatestListView({super.key});
 
@@ -19,7 +20,8 @@ class LatestListView extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(context, DetailsView.routeName);
               },
-              child: LatestItem()),
+              child: LatestItem(),
+            ),
           );
         },
       ),

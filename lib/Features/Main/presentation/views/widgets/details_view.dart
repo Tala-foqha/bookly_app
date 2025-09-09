@@ -4,12 +4,9 @@ import 'package:flutter/material.dart';
 
 class DetailsView extends StatelessWidget {
   const DetailsView({super.key});
-static const routeName='BookDetails';
+  static const routeName = 'BookDetails';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body:DetailsViewBody() ,
-    );
+    return Scaffold(backgroundColor: Colors.white, body: DetailsViewBody());
   }
 }

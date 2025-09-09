@@ -10,14 +10,10 @@ import 'package:outlined_text/outlined_text.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
-    static const routeName = 'Main';
-
+  static const routeName = 'Main';
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-     
-      body:MainViewBody() ,
-    );
+    return Scaffold(body: MainViewBody());
   }
 }
