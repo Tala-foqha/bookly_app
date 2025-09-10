@@ -5,6 +5,7 @@ import 'package:bookly_app/Features/Main/domain/entites/book_entity.dart';
 import 'package:bookly_app/Features/Main/domain/repos/home_repo.dart';
 import 'package:bookly_app/core/errors/failure.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class HomeRepoImpl extends HomeRepo {
   final HomeLocalDataSource homeLocalDataSource;
@@ -21,9 +22,12 @@ try {
   var books=await   homeRemoteDataSource.fetchFeaturedBooks();
   return right(books);
 }  catch (e) {
-  return left(Failure());
+  if(e is DioException){
+  return left(ServerFailure.fromDioError(e));
+}else{
+  return left(ServerFailure(message: e.toString()));
 }
-  }
+  }}
 
   @override
   Future<Either<Failure, List<BookEntity>>> fetchNewestBooks()async {
