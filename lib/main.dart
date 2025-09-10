@@ -4,11 +4,14 @@ import 'package:bookly_app/Features/splash/presentation/views/splash_view.dart';
 import 'package:bookly_app/core/helper_functions/on_generate_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 
 void main()async {
   runApp(const BooklyApp());
+await Hive.initFlutter();
   Hive.registerAdapter(BookEntityAdapter());
-await  Hive.openBox('featuredBooks');
+await  Hive.openBox<BookEntity>('featuredBooks');
+await  Hive.openBox<BookEntity>('newestBooks');
 }
 
 class BooklyApp extends StatelessWidget {
