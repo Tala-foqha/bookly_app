@@ -1,10 +1,13 @@
 // main.dart
 import 'package:bookly_app/Features/Main/data/repos/home_repo_impl.dart';
 import 'package:bookly_app/Features/Main/domain/entites/book_entity.dart';
+import 'package:bookly_app/Features/Main/domain/use_case/fetch_featured_books_use_case.dart';
+import 'package:bookly_app/Features/Main/domain/use_case/fetch_newest_books_use_case.dart';
 import 'package:bookly_app/Features/Main/presentation/maneger/featured_books/featured_books_cubit.dart';
 import 'package:bookly_app/Features/Main/presentation/maneger/newest_books/newest_books_cubit.dart';
 import 'package:bookly_app/Features/splash/presentation/views/splash_view.dart';
 import 'package:bookly_app/core/helper_functions/on_generate_route.dart';
+import 'package:bookly_app/core/utils/fuctions/set_up_services_locators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
@@ -27,10 +30,12 @@ class BooklyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => FeaturedBooksCubit<HomeRepoImpl>(),
+          create: (context) => FeaturedBooksCubit(FetchFeaturedBooksUseCase(homeRepo: getIt.get<HomeRepoImpl>())),
         ),
         BlocProvider(
-          create: (context) => NewestBooksCubit(),
+          create: (context) => NewestBooksCubit(
+            FetchNewestBooksUseCase(homeRepo: getIt.get<HomeRepoImpl>())
+          ),
         ),
       ],
      
