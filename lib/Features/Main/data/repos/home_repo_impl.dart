@@ -35,6 +35,6 @@ try {
   var books=await   homeRemoteDataSource.fetchNewestdBooks();
   return right(books);
 }  catch (e) {
-  return left(Failure());
+  return left(ServerFailure( message: e.toString()));
 }
   }}
