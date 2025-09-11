@@ -1,4 +1,6 @@
 // Features/Main/data/repos/home_repo_impl.dart
+import 'dart:math';
+
 import 'package:bookly_app/Features/Main/data/data_source/home_local_data_source.dart';
 import 'package:bookly_app/Features/Main/data/data_source/home_remote_data_source.dart';
 import 'package:bookly_app/Features/Main/domain/entites/book_entity.dart';
@@ -23,9 +25,18 @@ try {
   return right(books);
 }  catch (e) {
   if(e is DioException){
+   
+
   return left(ServerFailure.fromDioError(e));
+  
+  
+ 
+ 
+
+
 }else{
   return left(ServerFailure(message: e.toString()));
+
 }
   }}
 

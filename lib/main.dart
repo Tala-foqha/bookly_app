@@ -8,20 +8,30 @@ import 'package:bookly_app/Features/Main/presentation/maneger/newest_books/newes
 import 'package:bookly_app/Features/splash/presentation/views/splash_view.dart';
 import 'package:bookly_app/core/helper_functions/on_generate_route.dart';
 import 'package:bookly_app/core/utils/fuctions/set_up_services_locators.dart';
+import 'package:bookly_app/core/utils/fuctions/simple_blocobserver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 
-void main()async {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // 1) Hive init + adapters + boxes
+  await Hive.initFlutter();
+  Hive.registerAdapter(BookEntityAdapter()); // تأكدي إن ملف g.dart مولّد
+  await Hive.openBox<BookEntity>('featuredBooks');
+  await Hive.openBox<BookEntity>('newestBooks');
+
+  // 2) Service Locator
+  setupServicesLocator();
+
+  // 3) Bloc Observer (اختياري)
+  Bloc.observer = SimpleBlocobserver();
+
+  // 4) شغّلي التطبيق بعد ما كل شيء يجهز
   runApp(const BooklyApp());
-await Hive.initFlutter();
-  Hive.registerAdapter(BookEntityAdapter());
-
-await  Hive.openBox<BookEntity>('featuredBooks');
-await  Hive.openBox<BookEntity>('newestBooks');
 }
-
 class BooklyApp extends StatelessWidget {
   const BooklyApp({super.key});
 
@@ -30,7 +40,7 @@ class BooklyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => FeaturedBooksCubit(FetchFeaturedBooksUseCase(homeRepo: getIt.get<HomeRepoImpl>())),
+          create: (context) => FeaturedBooksCubit(FetchFeaturedBooksUseCase(homeRepo: getIt.get<HomeRepoImpl>()))..fetchFeaturedBooks(),
         ),
         BlocProvider(
           create: (context) => NewestBooksCubit(
