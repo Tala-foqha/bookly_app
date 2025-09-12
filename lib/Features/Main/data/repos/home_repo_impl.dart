@@ -17,11 +17,11 @@ class HomeRepoImpl extends HomeRepo {
   @override
   Future<Either<Failure, List<BookEntity>>> fetchFeaturedBooks({int pageNumber=0})async {
 try {
-  var booksList=homeLocalDataSource.fetchFeaturedBooks();
+  var booksList=homeLocalDataSource.fetchFeaturedBooks(pageNumber: pageNumber);
   if(booksList.isNotEmpty){
     return right(booksList);
   }
-  var books=await   homeRemoteDataSource.fetchFeaturedBooks();
+  var books=await   homeRemoteDataSource.fetchFeaturedBooks(pageNumber: pageNumber);
   return right(books);
 }  catch (e) {
   if(e is DioException){
@@ -41,13 +41,13 @@ try {
   }}
 
   @override
-  Future<Either<Failure, List<BookEntity>>> fetchNewestBooks()async {
+  Future<Either<Failure, List<BookEntity>>> fetchNewestBooks({int pageNumber=0})async {
    try {
-  var booksList=homeLocalDataSource.fetchNewestBooks();
+  var booksList=homeLocalDataSource.fetchNewestBooks(pageNumber: DateTime.april);
   if(booksList.isNotEmpty){
     return right(booksList);
   }
-  var books=await   homeRemoteDataSource.fetchNewestdBooks();
+  var books=await   homeRemoteDataSource.fetchNewestdBooks(pageNumber: pageNumber);
   return right(books);
 }  catch (e) {
   return left(ServerFailure( message: e.toString()));

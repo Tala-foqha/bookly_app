@@ -1,10 +1,12 @@
 // Features/Main/presentation/views/widgets/latest_item.dart
+import 'package:bookly_app/Features/Main/domain/entites/book_entity.dart';
 import 'package:bookly_app/core/utils/app_styles.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LatestItem extends StatelessWidget {
-  LatestItem({super.key});
+  LatestItem({super.key, required this.book});
   List<String> stars = [
     'assets/svg/star.svg',
     'assets/svg/star.svg',
@@ -12,6 +14,7 @@ class LatestItem extends StatelessWidget {
     'assets/svg/star.svg',
     'assets/svg/starblack.svg',
   ];
+  final BookEntity book;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -25,9 +28,9 @@ class LatestItem extends StatelessWidget {
               aspectRatio: 89 / 121,
               child: ClipRRect(
                 borderRadius: BorderRadiusGeometry.circular(20),
-                child: Image.asset(
-                  'assets/images/Book image.png',
-                  fit: BoxFit.scaleDown,
+                child:CachedNetworkImage (
+                 
+                  fit: BoxFit.scaleDown, imageUrl:  book.image!,
                 ),
               ),
             ),
@@ -43,14 +46,14 @@ class LatestItem extends StatelessWidget {
             Text(
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              'Starlight\'s Shadow #1',
+              book.title,
               style: AppStyles.regulateIlatic10.copyWith(color: Colors.black),
             ),
             SizedBox(height: 5),
             Text(
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              'Hunt the Stars',
+              book.author!,
               style: AppStyles.bold14.copyWith(color: Color(0xff9A9A9A)),
             ),
           ],

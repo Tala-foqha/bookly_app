@@ -6,6 +6,14 @@ abstract class NewestBooksState {}
 
 class NewestBooksInitial extends NewestBooksState {}
 class NewestBooksLoading extends NewestBooksState {}
+class NewestBooksPaginationLoading extends NewestBooksState {}
+class NewestBooksPaginationFailure extends NewestBooksState {
+  final String error;
+
+  NewestBooksPaginationFailure({required this.error});
+}
+
+
 class NewestBooksSuccess extends NewestBooksState {
 final  List<BookEntity>books;
 
