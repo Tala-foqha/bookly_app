@@ -1,12 +1,11 @@
-// Features/Main/data/models/book/book.model.dart
+// Features/Main/data/models/details/details/details.model.dart
 import 'package:bookly_app/Features/Main/domain/entites/book_entity.dart';
 
 import 'access_info.model.dart';
 import 'sale_info.model.dart';
-import 'search_info.model.dart';
 import 'volume_info.model.dart';
 
-class BookModel extends BookEntity {
+class Details extends BookEntity{
   String? kind;
   String? id;
   String? etag;
@@ -14,9 +13,8 @@ class BookModel extends BookEntity {
   VolumeInfo? volumeInfo;
   SaleInfo? saleInfo;
   AccessInfo? accessInfo;
-  SearchInfo? searchInfo;
 
-  BookModel({ 
+  Details({
     this.kind,
     this.id,
     this.etag,
@@ -24,17 +22,17 @@ class BookModel extends BookEntity {
     this.volumeInfo,
     this.saleInfo,
     this.accessInfo,
-    this.searchInfo,
-  }) : super(Bookid: id!,
-   image: volumeInfo?.imageLinks?.thumbnail??'',
-    title: volumeInfo?.title??"",
-     author: volumeInfo!.authors != null
-            ? List<String>.from(volumeInfo!.authors!)
-            : ['No Author'], 
-     rating: 0.0 , price: 0.0,
-     description: volumeInfo?.description??"");
+  }) : super(image: volumeInfo?.imageLinks?.thumbnail??"",
+  Bookid: id??"",
+  title: volumeInfo?.title??'',
+  subTitle: volumeInfo?.publisher??"",
+  link: selfLink,
+  author: volumeInfo?.authors??[],
 
-  factory BookModel.fromJson(Map<String, dynamic> json) => BookModel(
+
+  );
+
+  factory Details.fromJson(Map<String, dynamic> json) => Details(
     kind: json['kind'] as String?,
     id: json['id'] as String?,
     etag: json['etag'] as String?,
@@ -48,9 +46,6 @@ class BookModel extends BookEntity {
     accessInfo: json['accessInfo'] == null
         ? null
         : AccessInfo.fromJson(json['accessInfo'] as Map<String, dynamic>),
-    searchInfo: json['searchInfo'] == null
-        ? null
-        : SearchInfo.fromJson(json['searchInfo'] as Map<String, dynamic>),
   );
 
   Map<String, dynamic> toJson() => {
@@ -61,6 +56,5 @@ class BookModel extends BookEntity {
     'volumeInfo': volumeInfo?.toJson(),
     'saleInfo': saleInfo?.toJson(),
     'accessInfo': accessInfo?.toJson(),
-    'searchInfo': searchInfo?.toJson(),
   };
 }

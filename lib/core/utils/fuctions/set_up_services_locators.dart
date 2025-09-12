@@ -2,18 +2,21 @@
 import 'package:bookly_app/Features/Main/data/data_source/home_local_data_source.dart';
 import 'package:bookly_app/Features/Main/data/data_source/home_remote_data_source.dart';
 import 'package:bookly_app/Features/Main/data/repos/home_repo_impl.dart';
+import 'package:bookly_app/Features/Main/domain/repos/home_repo.dart';
 import 'package:bookly_app/core/utils/api_services.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-final getIt=GetIt.instance;
-void setupServicesLocator(){
+final getIt = GetIt.instance;
+void setupServicesLocator() {
   getIt.registerSingleton<ApiServices>(ApiServices(Dio()));
   getIt.registerSingleton<HomeRepoImpl>(
-  HomeRepoImpl(
-    homeLocalDataSource: HomeLocalDataSourceImpl(),
-    homeRemoteDataSource: HomeRemoteDataSourceImpl(
-      apiServices: getIt.get<ApiServices>(),
+    HomeRepoImpl(
+      homeLocalDataSource: HomeLocalDataSourceImpl(),
+      homeRemoteDataSource: HomeRemoteDataSourceImpl(
+        apiServices: getIt.get<ApiServices>(),
+      ),
     ),
-  ),
-);}
+  );
+  getIt.registerSingleton<HomeRepo>(getIt.get<HomeRepoImpl>());
+}

@@ -17,21 +17,28 @@ import 'package:hive_flutter/adapters.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 1) Hive init + adapters + boxes
+  // 1) Hive init + register adapter
   await Hive.initFlutter();
-  Hive.registerAdapter(BookEntityAdapter()); // تأكدي إن ملف g.dart مولّد
+
+  // نسجل BookEntityAdapter إذا مش مسجّل
+  if (!Hive.isAdapterRegistered(0)) {
+    Hive.registerAdapter(BookEntityAdapter());
+  }
+
+  // 2) افتح الـ Boxes
   await Hive.openBox<BookEntity>('featuredBooks');
   await Hive.openBox<BookEntity>('newestBooks');
 
-  // 2) Service Locator
+  // 3) Service Locator
   setupServicesLocator();
 
-  // 3) Bloc Observer (اختياري)
+  // 4) Bloc Observer (اختياري)
   Bloc.observer = SimpleBlocobserver();
 
-  // 4) شغّلي التطبيق بعد ما كل شيء يجهز
+  // 5) Run App
   runApp(const BooklyApp());
 }
+
 class BooklyApp extends StatelessWidget {
   const BooklyApp({super.key});
 
@@ -40,22 +47,22 @@ class BooklyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => FeaturedBooksCubit(FetchFeaturedBooksUseCase(homeRepo: getIt.get<HomeRepoImpl>()))..fetchFeaturedBooks(),
+          create: (context) => FeaturedBooksCubit(
+            FetchFeaturedBooksUseCase(homeRepo: getIt.get<HomeRepoImpl>()),
+          )..fetchFeaturedBooks(),
         ),
         BlocProvider(
           create: (context) => NewestBooksCubit(
-            FetchNewestBooksUseCase(homeRepo: getIt.get<HomeRepoImpl>()
-            )
+            FetchNewestBooksUseCase(homeRepo: getIt.get<HomeRepoImpl>()),
           )..fetchNewestBooks(),
         ),
       ],
-     
       child: MaterialApp(
         onGenerateRoute: onGenerateRoute,
         initialRoute: SplashView.routeName,
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: Colors.black),
-        home: SplashView(),
+        home: const SplashView(),
       ),
     );
   }

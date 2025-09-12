@@ -1,7 +1,7 @@
 // Features/Main/presentation/views/widgets/home_view.dart
 import 'package:bookly_app/Features/Main/presentation/views/widgets/best_seller_widget.dart';
 import 'package:bookly_app/Features/Main/presentation/views/widgets/books_tab.dart';
- import 'package:bookly_app/Features/Main/presentation/views/widgets/latest_list_view.dart';
+import 'package:bookly_app/Features/Main/presentation/views/widgets/latest_list_view.dart';
 import 'package:bookly_app/Features/Main/presentation/views/widgets/latest_list_view_bloc_builder.dart';
 import 'package:bookly_app/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';

@@ -8,18 +8,18 @@ class BestSellerLoadingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height*0.3,
+      height: MediaQuery.of(context).size.height * 0.3,
       child: ListView.separated(
-              // اربط الكنترولر
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.only(left: 16),
-              itemCount: 15,
-              itemBuilder: (context, index) {
-                return CustomBookImageLoadingIndicator();
-                
-              },
-              separatorBuilder: (context, index) => const SizedBox(width: 10),
-            ),
-    );;
+        // اربط الكنترولر
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.only(left: 16),
+        itemCount: 15,
+        itemBuilder: (context, index) {
+          return CustomBookImageLoadingIndicator();
+        },
+        separatorBuilder: (context, index) => const SizedBox(width: 10),
+      ),
+    );
+    ;
   }
 }

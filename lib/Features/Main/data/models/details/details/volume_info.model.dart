@@ -1,4 +1,5 @@
-// Features/Main/data/models/book/volume_info.model.dart
+// Features/Main/data/models/details/details/volume_info.model.dart
+import 'dimensions.model.dart';
 import 'image_links.model.dart';
 import 'industry_identifier.model.dart';
 import 'panelization_summary.model.dart';
@@ -6,7 +7,6 @@ import 'reading_modes.model.dart';
 
 class VolumeInfo {
   String? title;
-  String? subtitle;
   List<String>? authors;
   String? publisher;
   String? publishedDate;
@@ -14,6 +14,8 @@ class VolumeInfo {
   List<IndustryIdentifier>? industryIdentifiers;
   ReadingModes? readingModes;
   int? pageCount;
+  int? printedPageCount;
+  Dimensions? dimensions;
   String? printType;
   List<String>? categories;
   String? maturityRating;
@@ -28,7 +30,6 @@ class VolumeInfo {
 
   VolumeInfo({
     this.title,
-    this.subtitle,
     this.authors,
     this.publisher,
     this.publishedDate,
@@ -36,6 +37,8 @@ class VolumeInfo {
     this.industryIdentifiers,
     this.readingModes,
     this.pageCount,
+    this.printedPageCount,
+    this.dimensions,
     this.printType,
     this.categories,
     this.maturityRating,
@@ -51,8 +54,7 @@ class VolumeInfo {
 
   factory VolumeInfo.fromJson(Map<String, dynamic> json) => VolumeInfo(
     title: json['title'] as String?,
-    subtitle: json['subtitle'] as String?,
-    authors: (json['authors'] as List<dynamic>?)
+    authors:(json['authors'] as List<dynamic>?)
         ?.map((author) => author.toString())
         .toList(),
 
@@ -66,6 +68,10 @@ class VolumeInfo {
         ? null
         : ReadingModes.fromJson(json['readingModes'] as Map<String, dynamic>),
     pageCount: json['pageCount'] as int?,
+    printedPageCount: json['printedPageCount'] as int?,
+    dimensions: json['dimensions'] == null
+        ? null
+        : Dimensions.fromJson(json['dimensions'] as Map<String, dynamic>),
     printType: json['printType'] as String?,
     categories: (json['categories'] as List<dynamic>?)
         ?.map((e) => e.toString())
@@ -90,7 +96,6 @@ class VolumeInfo {
 
   Map<String, dynamic> toJson() => {
     'title': title,
-    'subtitle': subtitle,
     'authors': authors,
     'publisher': publisher,
     'publishedDate': publishedDate,
@@ -98,6 +103,8 @@ class VolumeInfo {
     'industryIdentifiers': industryIdentifiers?.map((e) => e.toJson()).toList(),
     'readingModes': readingModes?.toJson(),
     'pageCount': pageCount,
+    'printedPageCount': printedPageCount,
+    'dimensions': dimensions?.toJson(),
     'printType': printType,
     'categories': categories,
     'maturityRating': maturityRating,

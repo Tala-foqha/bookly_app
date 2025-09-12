@@ -1,5 +1,6 @@
 // Features/Main/data/data_source/home_remote_data_source.dart
 import 'package:bookly_app/Features/Main/data/models/book/book.model.dart';
+import 'package:bookly_app/Features/Main/data/models/details/details/details.model.dart';
 import 'package:bookly_app/Features/Main/domain/entites/book_entity.dart';
 import 'package:bookly_app/core/utils/api_services.dart';
 import 'package:bookly_app/core/utils/fuctions/save_books.dart';
@@ -8,6 +9,8 @@ abstract class HomeRemoteDataSource {
    Future<List<BookEntity>>fetchFeaturedBooks({int pageNumber=0});
 
       Future<List<BookEntity>>fetchNewestdBooks({int pageNumber=0});
+            Future<BookEntity>fetchDetailsBooks({required String bookId});
+
 
 
 }
@@ -46,5 +49,11 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource{
   List<BookEntity> books = getBooksList(data);
   saveData(books, 'newestBooks');
   return books;
+  }
+  
+  @override
+  Future<BookEntity> fetchDetailsBooks({required String bookId}) async{
+    var data=await apiServices.get(endPoint: 'volumes/$bookId');
+    return Details.fromJson(data);
   }
 }

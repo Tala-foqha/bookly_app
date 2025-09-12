@@ -1,5 +1,4 @@
 // Features/Main/data/repos/home_repo_impl.dart
-import 'dart:math';
 
 import 'package:bookly_app/Features/Main/data/data_source/home_local_data_source.dart';
 import 'package:bookly_app/Features/Main/data/data_source/home_remote_data_source.dart';
@@ -52,4 +51,17 @@ try {
 }  catch (e) {
   return left(ServerFailure( message: e.toString()));
 }
+  }
+  
+  @override
+  Future<Either<Failure,BookEntity>> fetchDetailsBooks({required String BookId})async {
+    try{
+   var books=await   homeRemoteDataSource.fetchDetailsBooks(bookId: BookId);
+   return Right(books);
+   }
+   catch (e) {
+  return left(ServerFailure( message: e.toString()));
+}
+
+
   }}

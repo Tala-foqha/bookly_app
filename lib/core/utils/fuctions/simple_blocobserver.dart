@@ -10,6 +10,4 @@ class SimpleBlocobserver extends BlocObserver {
     log(change.toString());
     super.onChange(bloc, change);
   }
-
-
 }

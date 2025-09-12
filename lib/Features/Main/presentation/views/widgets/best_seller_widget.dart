@@ -15,8 +15,8 @@ class BestSellerWidget extends StatefulWidget {
 }
 
 class _BestSellerWidgetState extends State<BestSellerWidget> {
-  var nextPage=1;
-  var isLoading=false;
+  var nextPage = 1;
+  var isLoading = false;
 
   final ScrollController _scrollController = ScrollController();
 
@@ -32,19 +32,22 @@ class _BestSellerWidgetState extends State<BestSellerWidget> {
     _scrollController.dispose();
     super.dispose();
   }
-  void _scrollListner()async{
-    var currentPosition=_scrollController.position.pixels;
-    var maxScrollLength= _scrollController.position.maxScrollExtent * 0.7;
-    if(currentPosition>=0.7*maxScrollLength){
-      if (!isLoading) {
-        isLoading=true;
-await  context.read<FeaturedBooksCubit>().fetchFeaturedBooks(pageNumber: nextPage++);
-isLoading=false;
-}
 
+  void _scrollListner() async {
+    var currentPosition = _scrollController.position.pixels;
+    var maxScrollLength = _scrollController.position.maxScrollExtent * 0.7;
+    if (currentPosition >= 0.7 * maxScrollLength) {
+      if (!isLoading) {
+        isLoading = true;
+        await context.read<FeaturedBooksCubit>().fetchFeaturedBooks(
+          pageNumber: nextPage++,
+        );
+        isLoading = false;
+      }
     }
   }
-  List<BookEntity>books=[];
+
+  List<BookEntity> books = [];
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +56,10 @@ isLoading=false;
         if (state is FeaturedBooksFailure) {
           return Text(state.errorMessage);
         }
-        if (state is FeaturedBooksSuccess||
-        state is FeaturedBooksPaginationLoading ||
-        state is FeaturedBooksPaginationFailure) {
-          List<BookEntity> book =books;
+        if (state is FeaturedBooksSuccess ||
+            state is FeaturedBooksPaginationLoading ||
+            state is FeaturedBooksPaginationFailure) {
+          List<BookEntity> book = books;
 
           return ListView.separated(
             controller: _scrollController, // اربط الكنترولر
@@ -76,11 +79,12 @@ isLoading=false;
           );
         }
         return BestSellerLoadingIndicator();
-      }, listener: (BuildContext context, FeaturedBooksState state) { 
-        if(state is FeaturedBooksSuccess){
+      },
+      listener: (BuildContext context, FeaturedBooksState state) {
+        if (state is FeaturedBooksSuccess) {
           books.addAll(state.books);
         }
-       },
+      },
     );
   }
 }

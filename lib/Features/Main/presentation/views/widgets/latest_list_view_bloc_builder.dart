@@ -6,31 +6,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LatestListViewBlocBuilder extends StatelessWidget {
-   LatestListViewBlocBuilder({super.key});
-List<BookEntity>books=[];
+  LatestListViewBlocBuilder({super.key});
+  List<BookEntity> books = [];
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<NewestBooksCubit, NewestBooksState>(
       builder: (context, state) {
         if (state is NewestBooksFailure) {
-          return SizedBox(
-            height: 200,
-            child: Center(
-              child: Text(state.error),
-            ),
-          );
+          return SizedBox(height: 200, child: Center(child: Text(state.error)));
         }
-        if (state is NewestBooksSuccess||state is NewestBooksPaginationLoading||state is NewestBooksPaginationFailure) {
-          return LatestListView(books: books,);
+        if (state is NewestBooksSuccess ||
+            state is NewestBooksPaginationLoading ||
+            state is NewestBooksPaginationFailure) {
+          return LatestListView(books: books);
         }
         return SizedBox(
           height: 200,
-          child: Center(child: CircularProgressIndicator()));
-      }, listener: (BuildContext context, NewestBooksState state) { 
-if(state is NewestBooksSuccess){
-  books.addAll(state.books);
-}
-       },
+          child: Center(child: CircularProgressIndicator()),
+        );
+      },
+      listener: (BuildContext context, NewestBooksState state) {
+        if (state is NewestBooksSuccess) {
+          books.addAll(state.books);
+        }
+      },
     );
   }
 }

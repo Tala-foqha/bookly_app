@@ -28,9 +28,9 @@ class LatestItem extends StatelessWidget {
               aspectRatio: 89 / 121,
               child: ClipRRect(
                 borderRadius: BorderRadiusGeometry.circular(20),
-                child:CachedNetworkImage (
-                 
-                  fit: BoxFit.scaleDown, imageUrl:  book.image!,
+                child: CachedNetworkImage(
+                  fit: BoxFit.scaleDown,
+                  imageUrl: book.image!,
                 ),
               ),
             ),
@@ -53,7 +53,7 @@ class LatestItem extends StatelessWidget {
             Text(
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              book.author!,
+              book.author!.first,
               style: AppStyles.bold14.copyWith(color: Color(0xff9A9A9A)),
             ),
           ],
