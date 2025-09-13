@@ -26,7 +26,8 @@ class Details extends BookEntity{
   Bookid: id??"",
   title: volumeInfo?.title??'',
   subTitle: volumeInfo?.publisher??"",
-  link: selfLink,
+  category: volumeInfo?.categories??[],
+  link: volumeInfo?.previewLink??'',
   author: volumeInfo?.authors??[],
 
 

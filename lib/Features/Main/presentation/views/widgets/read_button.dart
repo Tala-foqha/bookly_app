@@ -4,12 +4,14 @@ import 'package:bookly_app/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class ReadButton extends StatelessWidget {
-  const ReadButton({super.key});
-
+  const ReadButton({super.key, this.onPressed});
+final void Function()?onPressed;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: 
+onPressed,
+     
       child: Container(
         height: 35,
         width: 211,
